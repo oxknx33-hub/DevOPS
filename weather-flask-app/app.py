@@ -109,5 +109,26 @@ def get_weather_description(code):
  99: "Гроза с сильным градом"
  }
  return weather_codes.get(code, "Неизвестно")
+@app.route('/api/get-coords', methods=['GET'])
+def get_coords():
+    city = request.args.get('city', '').strip()
+    if not city:
+        return {'error': 'City name required'}, 400
+    
+    geo_url = f"https://geocoding-api.open-meteo.com/v1/search?name={city}&count=1&language=ru&format=json"
+    try:
+        resp = requests.get(geo_url)
+        resp.raise_for_status()
+        data = resp.json()
+        if data.get('results'):
+            res = data['results'][0]
+            return {
+                'lat': res['latitude'],
+                'lon': res['longitude'],
+                'name': res['name']
+            }, 200
+        return {'error': 'City not found'}, 404
+    except Exception as e:
+        return {'error': str(e)}, 500
 if __name__ == '__main__':
  app.run(debug=True, port=5000)

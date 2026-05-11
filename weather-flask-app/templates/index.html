@@ -19,16 +19,41 @@
     <p>Введите координаты или выберите город из списка:</p>
     
     <form action="/weather" method="get">
-        <div class="form-group">
-            <label for="lat">Широта:</label>
-            <input type="text" id="lat" name="lat" placeholder="55.7558" required>
-        </div>
-        <div class="form-group">
-            <label for="lon">Долгота:</label>
-            <input type="text" id="lon" name="lon" placeholder="37.6173" required>
-        </div>
-        <button type="submit">Получить погоду</button>
-    </form>
+    	<div class="form-group">
+        	<label for="city">Or enter city:</label>
+        	<input type="text" id="city" placeholder="Example: Kazan">
+        	<button type="button" onclick="fetchCoords()" style="margin-top:5px;">Get Coords</button>
+    	</div>
+    	<div class="form-group">
+       	 	<label for="lat">Latitude:</label>
+        	<input type="text" id="lat" name="lat" placeholder="55.7558" required>
+    	</div>
+    	<div class="form-group">
+        	<label for="lon">Longitude:</label>
+        	<input type="text" id="lon" name="lon" placeholder="37.6173" required>
+    	</div>
+    	<button type="submit">Get Weather</button>
+	</form>
+
+	<script>
+	function fetchCoords() {
+    		const city = document.getElementById('city').value;
+    		if (!city) return alert('Enter city name');
+    
+    	fetch(`/api/get-coords?city=${encodeURIComponent(city)}`)
+        	.then(r => r.json())
+        	.then(data => {
+            		if (data.lat && data.lon) {
+                		document.getElementById('lat').value = data.lat;
+                		document.getElementById('lon').value = data.lon;
+                		if (data.name) document.getElementById('city').value = data.name;
+            		} else {
+                		alert('Error: ' + (data.error || 'Coords not found'));
+            		}
+        	})
+        	.catch(() => alert('Request failed'));
+	}
+	</script>
 
     <div class="city-list">
         <button class="city-btn" onclick="setCoords(55.7558, 37.6173)">Москва</button>
