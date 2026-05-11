@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-<<<<<<< HEAD
+
 
 # 1. Получаем путь из аргументов
 if len(sys.argv) < 2:
@@ -74,7 +74,7 @@ try:
 except Exception as e:
     print(f"КРИТИЧЕСКАЯ ОШИБКА записи файла: {e}")
     sys.exit(1)
-=======
+
 from collections import defaultdict
 
 def analyze_folder(path):
@@ -152,4 +152,4 @@ if __name__ == "__main__":
         print(f"Total size: {result['total_size_bytes']} bytes")
     else:
         sys.exit(1)
->>>>>>> ce0318ca7f3fdcd25f069eb36daad6a03a537ecd
+
