@@ -2,4 +2,9 @@ Flask
 requests
 python-dotenv
 pytest
+<<<<<<< HEAD
 flake8
+=======
+flake8
+flask
+>>>>>>> 9a976710dd7a65fe5d6ba6304bfe517d091d1c8f

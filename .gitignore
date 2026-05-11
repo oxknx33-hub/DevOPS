@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.log
+report.json
+echo "weather-clone/" >> .gitignore
+echo "venv/" >> .gitignore
+echo ".env" >> .gitignore
+echo "__pycache__/" >> .gitignore
+echo "*.pyc" >> .gitignore
+echo "Thumbs.db" >> .gitignore
+echo "DS_Store" >> .gitignoreweather-clone/
+venv/
+.env
+__pycache__/
+*.pyc
+Thumbs.db
+DS_Store
